@@ -36,5 +36,5 @@ print("Alice returns a book: ", library.return_book(neuromancer, alice))
 print(library)
 
 library.remove_book(cryptonomicon, 1)
-print(f"Alice wants to read a book by Neil Stephenson:")
+print("Alice wants to read a book by Neil Stephenson:")
 print(f" {library.borrow_book(cryptonomicon, alice)}")
