@@ -1,16 +1,35 @@
 """This is the library management system.
 
 A Project to show Classes and the SOLID principles in a 2 hour workshop."""
-from typing import Optional, Dict, List
+from abc import ABC, abstractmethod
+from typing import Optional, Dict, List, Type
+from dataclasses import dataclass
 
 
-class Book:
+class Thing(ABC):
+    """This is the Thing class.
+
+    It is an abstract base class for things that can be borrowed."""
+
+    def __init__(self, title: str):
+        self.title = title
+
+    def __repr__(self) -> str:
+        return f'{self.title}'
+
+    @abstractmethod
+    def read(self) -> str:
+        """Read the thing."""
+        pass
+
+
+class Book(Thing):
     """This is the Book class.
 
     It kees track of a book in the library."""
 
     def __init__(self, title: str, author: str):
-        self.title = title
+        super().__init__(title)
         self.author = author
 
     def __repr__(self) -> str:
@@ -18,6 +37,19 @@ class Book:
 
     def read(self) -> str:
         return f'{self.title} by {self.author} is being read.'
+
+
+class Member:
+    """This is the Member class.
+
+    It keeps track of a member of the library and the borrowed books."""
+
+    def __init__(self, name: str, books: Optional[List[Book]] = None):
+        self.name = name
+        self.books = books or []
+
+    def __repr__(self) -> str:
+        return f'{self.name}, has: {len(self.books)} books'
 
 
 class Library:
@@ -114,7 +146,7 @@ class Library:
                    f'inventory.'
         raise ValueError(f'{book} not in inventory')
 
-    def borrow_book(self, book: Book, member: 'Member') -> str:
+    def borrow_book(self, book: Book, member: Type[Member]) -> str:
         """
         Borrow a book from the library.
 
@@ -198,14 +230,4 @@ class Library:
             raise ValueError(f'{book} not in inventory')
 
 
-class Member:
-    """This is the Member class.
 
-    It keeps track of a member of the library and the borrowed books."""
-
-    def __init__(self, name: str, books: Optional[List[Book]] = None):
-        self.name = name
-        self.books = books or []
-
-    def __repr__(self) -> str:
-        return f'{self.name}, has: {len(self.books)} books'
