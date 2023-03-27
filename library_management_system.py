@@ -183,10 +183,9 @@ class Library:
                 member.books.append(book)
                 return f"{book.title} is now borrowed by {member.name}."
             raise ValueError(f'{book} not available')
-        else:
-            raise ValueError(f'{book} not in inventory')
+        raise ValueError(f'{book} not in inventory')
 
-    def return_book(self, book: Book, member: 'Member') -> str:
+    def return_book(self, book: Book, member: Type[Member]) -> str:
         """
         Return a book to the library.
 
@@ -226,8 +225,7 @@ class Library:
                 member.books.remove(book)
                 return f"{book.title} returned by {member.name}"
             raise ValueError(f'{member} does not have {book}')
-        else:
-            raise ValueError(f'{book} not in inventory')
+        raise ValueError(f'{book} not in inventory')
 
 
 
