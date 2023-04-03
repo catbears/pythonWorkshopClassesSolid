@@ -1,4 +1,4 @@
-from library_management_system import Book, Library, Member
+from lms.library_management_system import Book, Library, Member
 
 # Instantiating three members_books
 print("Instantiating three books:")

@@ -3,7 +3,7 @@
 A Project to show Classes and the SOLID principles in a 2 hour workshop."""
 from abc import ABC, abstractmethod
 from typing import Optional, Dict, List, Type
-from dataclasses import dataclass
+import pandas as pd
 
 
 class Thing(ABC):
@@ -226,6 +226,3 @@ class Library:
                 return f"{book.title} returned by {member.name}"
             raise ValueError(f'{member} does not have {book}')
         raise ValueError(f'{book} not in inventory')
-
-
-
